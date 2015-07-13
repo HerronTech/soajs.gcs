@@ -33,7 +33,7 @@
     "mocha": "*",
     "shelljs": "*"
   },
-  "dependencies": {
+  "peerDependencies": {
     "soajs": "0.1.*"
   }
 }
