@@ -33,8 +33,10 @@
     "mocha": "*",
     "shelljs": "*"
   },
-  "peerDependencies": {
-    "soajs": "0.1.*",
+  "dependencies":{
     "gridfs-stream": "*"
+  },
+  "peerDependencies": {
+    "soajs": "0.2.*"
   }
 }
