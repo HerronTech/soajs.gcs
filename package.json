@@ -34,7 +34,8 @@
     "shelljs": "*"
   },
   "dependencies":{
-    "gridfs-stream": "*"
+    "gridfs-stream": "*",
+    "formidable": "*"
   },
   "peerDependencies": {
     "soajs": "0.2.*"
