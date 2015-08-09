@@ -67,21 +67,16 @@ describe("GCS Tests", function () {
     var soajsauth;
     before(function (done) {
         var options = {
-            uri: 'http://127.0.0.1:4000/urac/login',
             headers: {
-                'Content-Type': 'application/json',
-                key: extKey
+                'Content-Type': 'application/json'
             },
-            body: {
+            form: {
                 "username": "owner",
                 "password": "123456"
-            },
-            json: true
+            }
         };
-        request.post(options, function (error, response, body) {
-            assert.ifError(error);
+        executeMyRequest(options, "urac/login", "post", function (body) {
             assert.ok(body);
-            console.log(JSON.stringify(body));
             soajsauth = body.soajsauth;
             done();
         });
