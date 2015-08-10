@@ -1,6 +1,7 @@
 # soajs.gcs
-[![Build Status](https://travis-ci.org/soajs/soajs.GCS.svg?branch=master)](https://travis-ci.org/soajs/soajs.GCS)
-[![Coverage Status](https://coveralls.io/repos/soajs/soajs.GCS/badge.png)](https://coveralls.io/r/soajs/soajs.GCS)
+[![Build Status](https://travis-ci.org/soajs/soajs.gcs.svg?branch=master)](https://travis-ci.org/soajs/soajs.gcs)
+[![Coverage Status](https://coveralls.io/repos/soajs/soajs.gcs/badge.png)](https://coveralls.io/r/soajs/soajs.gcs)
+[![NPM version](https://badge.fury.io/js/soajs.gcs.svg)](http://badge.fury.io/js/soajs.gcs)
 
 SOAJS GCS is Generic Content Service Generator. 
 
