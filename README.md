@@ -43,4 +43,4 @@ $ node.
 * GCS provides the ability to manage the data of all deployed GCS services via SOAJS UI Dashboard
 
 
-More information is available on the website section [GCS](http://www.soajs.org/#/documentation/advanced/gcs).
+More information is available on the website section [GCS](http://www.soajs.org/#/documentation/services/gcs).
