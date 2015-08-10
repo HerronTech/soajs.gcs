@@ -1,5 +1,5 @@
 {
-  "name": "soajs.GCS",
+  "name": "soajs.gcs",
   "description": "soajs Generic Content Service",
   "version": "0.0.1",
   "author": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:soajs/soajs.GCS.git"
+    "url": "git@github.com:soajs/soajs.gcs.git"
   },
   "license" : "Apache-2.0",
   "engines": {
