@@ -1,4 +1,4 @@
-# soajs.GCS
+# soajs.gcs
 [![Build Status](https://travis-ci.org/soajs/soajs.GCS.svg?branch=master)](https://travis-ci.org/soajs/soajs.GCS)
 [![Coverage Status](https://coveralls.io/repos/soajs/soajs.GCS/badge.png)](https://coveralls.io/r/soajs/soajs.GCS)
 
