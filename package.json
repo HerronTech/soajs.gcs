@@ -38,6 +38,6 @@
   "dependencies":{
     "formidable": "*",
     "gridfs-stream": "*",
-    "soajs": "0.2.*"
+    "soajs": "https://github.com/soajs/soajs.git#develop"
   }
 }
