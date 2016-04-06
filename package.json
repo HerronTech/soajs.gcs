@@ -37,9 +37,7 @@
   },
   "dependencies":{
     "formidable": "*",
-    "gridfs-stream": "*"
-  },
-  "peerDependencies": {
-    "soajs": "0.2.*"
+    "gridfs-stream": "*",
+    "soajs": "soajs/soajs.git#develop"
   }
 }
