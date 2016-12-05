@@ -1,7 +1,7 @@
 {
   "name": "soajs.gcs",
   "description": "soajs Generic Content Service",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": {
     "name": "soajs team",
     "email": "team@soajs.org"
@@ -18,9 +18,9 @@
     "test": "grunt test"
   },
   "devDependencies": {
-    "soajs.mongodb.data": "0.1.*",
+    "soajs.mongodb.data": "0.2.*",
     "soajs.controller": "0.2.*",
-    "soajs.urac": "0.2.*",
+    "soajs.urac": "0.3.*",
     "grunt":"0.4.5",
     "grunt-contrib-jshint":"*",
     "grunt-jsdoc" : "*",
@@ -38,6 +38,6 @@
   "dependencies":{
     "formidable": "*",
     "gridfs-stream": "*",
-    "soajs": "0.3.*"
+    "soajs": "0.4.*"
   }
 }
