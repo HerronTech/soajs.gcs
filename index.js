@@ -1,5 +1,5 @@
 "use strict";
-var soajs = require('soajs');
+var soajsModules = require('soajs.core.modules');
 
 //the service name and version are provided as Environment Variables
 var serviceInfo = {
@@ -7,7 +7,7 @@ var serviceInfo = {
 	"version": parseInt(process.env.SOAJS_GC_VERSION, 10)
 };
 
-soajs.contentBuilder(serviceInfo, function(error, config) {
+soajsModules.contentBuilder(serviceInfo, function(error, config) {
 
 	//if error occurred while loading the service configuration
 	if(error) { throw new Error(error); }
