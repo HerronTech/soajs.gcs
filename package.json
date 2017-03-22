@@ -33,7 +33,7 @@
     "shelljs": "0.7.5",
     "soajs.controller": "0.2.*",
     "soajs.mongodb.data": "0.2.*",
-    "soajs.urac": "0.3.*"
+    "soajs.oauth": "0.3.*"
   },
   "dependencies":{
     "formidable": "1.0.17",

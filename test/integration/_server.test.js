@@ -3,7 +3,7 @@ var assert = require('assert');
 var shell = require('shelljs');
 var helper = require("../helper.js");
 var sampleData = require("soajs.mongodb.data/modules/gcs");
-var controller, urac;
+var controller, oauth;
 
 describe("importing sample data", function () {
 
@@ -25,7 +25,7 @@ describe("importing sample data", function () {
 		console.log('test data imported.');
 		controller = require("soajs.controller");
 		setTimeout(function () {
-			urac = require("soajs.urac");
+			oauth = require("soajs.oauth");
 			setTimeout(function () {
 				require("./soajs.gc.test.js");
 				done();

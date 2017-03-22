@@ -3,7 +3,7 @@ var fs = require("fs");
 var assert = require('assert');
 var request = require("request");
 var soajs = require('soajs');
-var util = require('soajs/lib/utils');
+var util = require('soajs.core.libs').utils;
 var helper = require("../helper.js");
 
 var dbConfig = require("./db.config.test.js");
@@ -66,21 +66,28 @@ function executeMyRequest(params, apiPath, method, cb) {
 
 describe("GCS Tests", function () {
 	
-	var soajsauth;
+	var access_token;
 	before(function (done) {
-		var options = {
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			form: {
-				"username": "owner",
-				"password": "123456"
-			}
-		};
-		executeMyRequest(options, "urac/login", "post", function (body) {
+		
+		executeMyRequest({}, "oauth/authorization", "get", function (body) {
 			assert.ok(body);
-			soajsauth = body.soajsauth;
-			done();
+			var authorization = body.data;
+			var options = {
+				headers: {
+					'Authorization': authorization,
+					'Content-Type': 'application/json'
+				},
+				form: {
+					"grant_type": "password",
+					"username": "owner",
+					"password": "123456"
+				}
+			};
+			executeMyRequest(options, "oauth/token", "post", function (body) {
+				assert.ok(body);
+				access_token = body.access_token;
+				done();
+			});
 		});
 	});
 	
@@ -142,12 +149,11 @@ describe("GCS Tests", function () {
 		
 		it("success - calling getSchema", function (done) {
 			var params = {
-				"headers": {
-					"soajsauth": soajsauth
+				"qs": {
+					"access_token": access_token
 				}
 			};
 			executeMyRequest(params, "gc_pages/schema", "get", function (body) {
-				console.log(JSON.stringify(body));
 				assert.ok(body.result);
 				assert.ok(body.data);
 				done();
@@ -156,10 +162,8 @@ describe("GCS Tests", function () {
 		
 		it("success - calling add", function (done) {
 			var params = {
-				"headers": {
-					"soajsauth": soajsauth
-				},
 				"qs": {
+					"access_token": access_token,
 					"env": "DEV"
 				},
 				"form": {
@@ -174,16 +178,14 @@ describe("GCS Tests", function () {
 				dataId = body.data[0]._id;
 				
 				params = {
-					"headers": {
-						"soajsauth": soajsauth
-					},
 					"qs": {
 						"env": "DEV",
 						"nid": dataId,
 						"action": "add",
 						"position": 0,
 						"field": "attachments",
-						"media": "document"
+						"media": "document",
+						"access_token": access_token
 					},
 					"formData": {
 						"my_file": fs.createReadStream("test.txt")
@@ -199,23 +201,17 @@ describe("GCS Tests", function () {
 		
 		it("success - calling get", function (done) {
 			var params = {
-				"headers": {
-					"soajsauth": soajsauth
-				},
 				"qs": {
+					"access_token": access_token,
 					"env": "DEV",
 					"id": dataId
 				}
 			};
 			executeMyRequest(params, "gc_pages/get", "get", function (body) {
-				console.log(JSON.stringify(body));
 				assert.ok(body.result);
 				assert.ok(body.data);
 				
 				params = {
-					"headers": {
-						"soajsauth": soajsauth
-					},
 					"qs": {
 						"env": "DEV",
 						"id": body.data.fields.attachments[0]._id
@@ -230,10 +226,8 @@ describe("GCS Tests", function () {
 		
 		it("success - calling upload a new file", function (done) {
 			var params = {
-				"headers": {
-					"soajsauth": soajsauth
-				},
 				"qs": {
+					"access_token": access_token,
 					"env": "DEV",
 					"nid": dataId,
 					"action": "add",
@@ -254,10 +248,8 @@ describe("GCS Tests", function () {
 		
 		it("success - calling update", function (done) {
 			var params = {
-				"headers": {
-					"soajsauth": soajsauth
-				},
 				"qs": {
+					"access_token": access_token,
 					"env": "DEV",
 					"id": dataId
 				},
@@ -267,16 +259,12 @@ describe("GCS Tests", function () {
 				}
 			};
 			executeMyRequest(params, "gc_pages/update", "post", function (body) {
-				console.log(JSON.stringify(body));
-				console.log(body.result)
 				assert.ok(body.result);
 				assert.ok(body.data);
 				
 				params = {
-					"headers": {
-						"soajsauth": soajsauth
-					},
 					"qs": {
+						"access_token": access_token,
 						"env": "DEV",
 						"nid": dataId,
 						"action": "edit",
@@ -298,10 +286,8 @@ describe("GCS Tests", function () {
 		
 		it("success - calling remove a file", function (done) {
 			var params = {
-				"headers": {
-					"soajsauth": soajsauth
-				},
 				"qs": {
+					"access_token": access_token,
 					"env": "DEV",
 					"id": dataId
 				}
@@ -312,10 +298,8 @@ describe("GCS Tests", function () {
 				assert.ok(body.data);
 				
 				var params = {
-					"headers": {
-						"soajsauth": soajsauth
-					},
 					"qs": {
+						"access_token": access_token,
 						"env": "DEV",
 						"id": body.data.fields.attachments[1]._id
 					}
@@ -330,10 +314,8 @@ describe("GCS Tests", function () {
 		
 		it("success - calling list", function (done) {
 			var params = {
-				"headers": {
-					"soajsauth": soajsauth
-				},
 				"qs": {
+					"access_token": access_token,
 					"env": "DEV"
 				}
 			};
@@ -347,10 +329,8 @@ describe("GCS Tests", function () {
 		
 		it("success - calling delete", function (done) {
 			var params = {
-				"headers": {
-					"soajsauth": soajsauth
-				},
 				"qs": {
+					"access_token": access_token,
 					"env": "DEV",
 					"id": dataId
 				}
@@ -420,8 +400,8 @@ describe("GCS Tests", function () {
 		
 		it("success - calling getSchema", function (done) {
 			var params = {
-				"headers": {
-					"soajsauth": soajsauth
+				"qs": {
+					"access_token": access_token
 				}
 			};
 			executeMyRequest(params, "gc_posts/schema", "get", function (body) {
@@ -434,10 +414,8 @@ describe("GCS Tests", function () {
 		
 		it("success - calling add", function (done) {
 			var params = {
-				"headers": {
-					"soajsauth": soajsauth
-				},
 				"qs": {
+					"access_token": access_token,
 					"env": "DEV"
 				},
 				"form": {
@@ -457,10 +435,8 @@ describe("GCS Tests", function () {
 		
 		it("success - calling get", function (done) {
 			var params = {
-				"headers": {
-					"soajsauth": soajsauth
-				},
 				"qs": {
+					"access_token": access_token,
 					"env": "DEV",
 					"id": dataId
 				}
@@ -475,10 +451,8 @@ describe("GCS Tests", function () {
 		
 		it("success - calling update", function (done) {
 			var params = {
-				"headers": {
-					"soajsauth": soajsauth
-				},
 				"qs": {
+					"access_token": access_token,
 					"env": "DEV",
 					"id": dataId
 				},
@@ -497,10 +471,8 @@ describe("GCS Tests", function () {
 		
 		it("success - calling list", function (done) {
 			var params = {
-				"headers": {
-					"soajsauth": soajsauth
-				},
 				"qs": {
+					"access_token": access_token,
 					"env": "DEV"
 				}
 			};
@@ -514,10 +486,8 @@ describe("GCS Tests", function () {
 		
 		it("success - calling delete", function (done) {
 			var params = {
-				"headers": {
-					"soajsauth": soajsauth
-				},
 				"qs": {
+					"access_token": access_token,
 					"env": "DEV",
 					"id": dataId
 				}
@@ -532,7 +502,7 @@ describe("GCS Tests", function () {
 		
 		it("killin pages gcs", function (done) {
 			gcService.stopService(function () {
-				console.log("gc_posts stopped.")
+				console.log("gc_posts stopped.");
 				done();
 			});
 		});
