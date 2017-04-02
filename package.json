@@ -31,14 +31,14 @@
     "mocha": "3.2.0",
     "request": "2.79.0",
     "shelljs": "0.7.5",
-    "soajs.controller": "0.2.*",
-    "soajs.mongodb.data": "0.2.*",
-    "soajs.oauth": "0.3.*"
+    "soajs.controller": "1.*",
+    "soajs.mongodb.data": "1.*",
+    "soajs.oauth": "1.*"
   },
   "dependencies":{
     "formidable": "1.0.17",
     "gridfs-stream": "1.1.1",
-    "soajs": "git+https://github.com/soajs/soajs.git#feature/sessionLess",
-    "soajs.core.modules": "git+https://github.com/soajs/soajs.core.modules.git#develop"
+    "soajs": "1.*",
+    "soajs.core.modules": "1.*"
   }
 }
