@@ -3,7 +3,7 @@ var fs = require("fs");
 var assert = require('assert');
 var request = require("request");
 var soajs = require('soajs');
-var util = require('soajs.core.libs').utils;
+var util = require('soajs').utils;
 var helper = require("../helper.js");
 
 var dbConfig = require("./db.config.test.js");
