@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git@github.com:soajs/soajs.gcs.git"
   },
-  "license" : "Apache-2.0",
+  "license": "Apache-2.0",
   "engines": {
     "node": "*"
   },
@@ -35,9 +35,9 @@
     "soajs.mongodb.data": "1.0.*",
     "soajs.oauth": "1.0.*"
   },
-  "dependencies":{
+  "dependencies": {
     "formidable": "1.0.17",
     "gridfs-stream": "1.1.1",
-    "soajs": "1.0.*"
+    "soajs": "2.0.4"
   }
 }
