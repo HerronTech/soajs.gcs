@@ -38,6 +38,6 @@
   "dependencies":{
     "formidable": "1.0.17",
     "gridfs-stream": "1.1.1",
-    "soajs": "1.0.*"
+    "soajs": "2.0.4"
   }
 }
